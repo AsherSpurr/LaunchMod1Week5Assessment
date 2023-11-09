@@ -12,12 +12,15 @@ namespace LaunchMod1Week5Assessment
         public string Email { get; private set; }
         private string Password { get; set; }
         public bool IsLoggedIn { get; set; }
+        
+        
 
         public User(string name, string email)
         {
             Name = name;
             Email = email;
             IsLoggedIn = false;
+           
         }
 
         public bool IsSetupComplete()
@@ -32,17 +35,17 @@ namespace LaunchMod1Week5Assessment
             }
         }
 
-        public void CreatePassword(string email, string password)
+        public string CreatePassword(string email, string password)
         {
-            if (email == Email)
+            var confirmation = "Password Created";
+            if (email == Email && password != null)
             {
                 Password = password;
             }
+            return confirmation;
+            //Returned confirmation instead of password to keep password "Secure" - Tests did run returning password instead of confirmation
+            //Also combined the two if statements into one for ease
 
-            if (Password != null)
-            {
-                var confirmation = "Password Created";
-            }
         }
 
         public string LogIn(string password)
@@ -55,9 +58,10 @@ namespace LaunchMod1Week5Assessment
             return "Not Logged In";
         }
 
-        public void LogOut()
+        public bool LogOut()
         {
             IsLoggedIn = false;
+            return IsLoggedIn; //I preferred keeping the boolean nature of the variable IsLOggedIn if its not going to return a string
         }
     }
 }
